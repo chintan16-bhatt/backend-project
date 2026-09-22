@@ -1,36 +1,30 @@
-import dns from 'dns';
-dns.setServers(['1.1.1.1', '8.8.8.8']);
+import dns from "dns";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 //require('dotenv').config({path:'./env'})
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 // import mongoose from "mongoose"
 // import { DB_NAME } from "./constants";
 import connectDB from "./db/index.js";
-import { error, log } from 'console';
+import { error, log } from "console";
 
 dotenv.config({
-  path:"./env"
-})
+  path: "./env",
+});
 
 connectDB()
-.then(()=>{
-  app.on("error",(error)=>{
-    console.log("ERROR:",error);
-    throw error
-    
+  .then(() => {
+    app.on("error", (error) => {
+      console.log("ERROR:", error);
+      throw error;
+    });
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`server is runnig on PORT ${process.env.PORT}`);
+    });
   })
-  app.listen(process.env.PORT||8000,()=>{
-    console.log(`server is runnig on PORT ${process.env.PORT}`);
-    
-  })
-})
-.catch((err)=>{
-  console.log("MONGO db connection failed !!!",err);
-  
-})
-
-
-
+  .catch((err) => {
+    console.log("MONGO db connection failed !!!", err);
+  });
 
 /*
 import express from "express"
